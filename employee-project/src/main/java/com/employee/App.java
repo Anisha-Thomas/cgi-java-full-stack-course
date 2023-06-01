@@ -39,7 +39,7 @@ public class App {
 
 			Employee employee = employeeDao
 					.createEmployee(new Employee(new Random().nextInt(1000), fName, lName, email));
-			System.out.println("Customer Created: " + employee);
+			System.out.println("Employee Created: " + employee);
 			break;
 		case 2:
 			List<Employee> list = employeeDao.getAllEmployee();
