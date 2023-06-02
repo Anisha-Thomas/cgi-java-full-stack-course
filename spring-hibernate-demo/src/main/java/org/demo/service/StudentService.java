@@ -1,10 +1,10 @@
-package org.demo.dao;
+package org.demo.service;
 
 import java.util.List;
 
 import org.demo.model.Student;
 
-public interface StudentDao {
+public interface StudentService {
 
 	void createStudent(Student student);
 
@@ -12,9 +12,8 @@ public interface StudentDao {
 
 	void deleteStudent(int id);
 
-
 	Student findStudent(int id);
 
-	void updateStudent(int id, String fname, String lname, String cemail);
+	void updateStudent(int id, String fname, String lastName, String email);
 
 }

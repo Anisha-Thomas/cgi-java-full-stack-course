@@ -1,6 +1,7 @@
 package org.demo.dao;
 
 import java.util.List;
+
 import org.demo.model.Student;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,7 +15,6 @@ public class StudentDaoImp implements StudentDao {
 
 	@Autowired
 	public StudentDaoImp(SessionFactory sessionFactory) {
-		super();
 		this.sessionFactory = sessionFactory;
 	}
 
@@ -34,29 +34,43 @@ public class StudentDaoImp implements StudentDao {
 		session.getTransaction().begin();
 		Query query = session.createQuery(hql);  
 		List<Student> list=query.list();
+		session.getTransaction().commit();
 		return list;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void deleteStudent(int id) {
 		Session session=sessionFactory.openSession();
 		session.getTransaction().begin();
-		Query query = session.createQuery("delete Student where studentId = :ID");
-		query.setParameter("ID", id);
-		 
-		System.out.println("Student Deleted Successfully..." +query);
+		Object student = (Student)session.load(Student.class,id);
+	    session.delete(student);
+
+	    //This makes the pending delete to be done
+	    session.flush() ;
+		System.out.println("Student Deleted Successfully..." );
+		session.getTransaction().commit();
 	}
 
 	@Override
-	public List<Student> findStudent(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student findStudent(int id) {
+		Session session=sessionFactory.openSession();
+		session.getTransaction().begin();
+		Student list=session.find(Student.class, id);	
+		session.getTransaction().commit();
+		return list;
 	}
 
 	@Override
 	public void updateStudent(int id, String fname, String lname, String cemail) {
-		// TODO Auto-generated method stub
-
+		Session session=sessionFactory.openSession();
+		session.getTransaction().begin();
+		Student s = session.get(Student.class, id);
+		s.setFirstName(fname);
+		s.setLastName(lname);
+		s.setEmail(cemail);
+		session.merge(s);
+		session.getTransaction().commit();
 	}
 
 }
