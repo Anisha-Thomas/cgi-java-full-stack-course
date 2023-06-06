@@ -2,12 +2,10 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.example.demo.dao.CustomerDao;
 import com.example.demo.model.Customer;
 
-@Service
+//@Service
 public class CustomerServiceImpl implements CustomerService{
 
 	private final CustomerDao customerDao;
