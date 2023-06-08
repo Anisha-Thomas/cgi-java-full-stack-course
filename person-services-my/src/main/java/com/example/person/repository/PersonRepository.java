@@ -15,5 +15,13 @@ public interface PersonRepository {
 
 	public Person findByFirstName(String name);
 
-	public Person updateByFirstName(String name);
+	public Person updateByFirstName(String name, Person person);
+
+	public Person findByLastName(String name);
+
+	public Person findByEmail(String email);
+
+	public Person updateByEmail(String email, Person person);
+
+	Person updateByLastName(String name, Person newperson);
 }

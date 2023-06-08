@@ -17,5 +17,13 @@ public interface PersonService {
 
 	public Person findByFirstName(String name);
 
-	public Person updateByFirstName(String name);
+	public Person updateByFirstName(String name, Person person);
+
+	public Person findByLastName(String lastName);
+
+	public Person updateByLastName(String lastName, Person person);
+
+	public Person findByEmail(String email);
+
+	public Person updateByEmail(String email, Person person);
 }

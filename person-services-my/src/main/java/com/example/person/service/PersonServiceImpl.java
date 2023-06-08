@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.person.model.Person;
 import com.example.person.repository.PersonRepository;
+
 @Service
 public class PersonServiceImpl implements PersonService {
 
@@ -42,8 +43,28 @@ public class PersonServiceImpl implements PersonService {
 
 	}
 
-	public Person updateByFirstName(String name) {
-		return personRepository.updateByFirstName(name);
+	public Person updateByFirstName(String name, Person person) {
+		return personRepository.updateByFirstName(name, person);
+
+	}
+
+	public Person findByLastName(String name) {
+		return personRepository.findByLastName(name);
+
+	}
+
+	public Person updateByLastName(String name, Person person) {
+		return personRepository.updateByLastName(name, person);
+
+	}
+
+	public Person findByEmail(String email) {
+		return personRepository.findByEmail(email);
+
+	}
+
+	public Person updateByEmail(String email, Person person) {
+		return personRepository.updateByEmail(email, person);
 
 	}
 }

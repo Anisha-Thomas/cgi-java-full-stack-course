@@ -67,13 +67,76 @@ public class PersonRepositoryImp implements PersonRepository {
 	}
 
 	@Override
-	public Person updateByFirstName(String name) {
+	public Person updateByFirstName(String name, Person newperson) {
 		Person tempPerson = null;
 		Collection<Person> personlist = persons.values();
+		System.out.println("Updated " + personlist);
 		for (Person person : personlist) {
 			if (person.getFirstName().equals(name)) {
 				tempPerson = person;
-				tempPerson.setFirstName(name);
+				System.out.println("Old" + tempPerson.getFirstName());
+				System.out.println("New Name " + newperson.getFirstName());
+				tempPerson.setFirstName(newperson.getFirstName());
+				break;
+			}
+		}
+		return tempPerson;
+	}
+
+	@Override
+	public Person findByLastName(String name) {
+		Person tempPerson = null;
+		Collection<Person> personlist = persons.values();
+		for (Person person : personlist) {
+			if (person.getLastName().equals(name)) {
+				tempPerson = person;
+				break;
+			}
+		}
+		return tempPerson;
+	}
+
+	@Override
+	public Person findByEmail(String email) {
+		Person tempPerson = null;
+		Collection<Person> personlist = persons.values();
+		for (Person person : personlist) {
+			if (person.getEmail().equals(email)) {
+				tempPerson = person;
+				break;
+			}
+		}
+		return tempPerson;
+	}
+
+	@Override
+	public Person updateByEmail(String name, Person newperson) {
+		Person tempPerson = null;
+		Collection<Person> personlist = persons.values();
+		System.out.println("Updated " + personlist);
+		for (Person person : personlist) {
+			if (person.getEmail().equals(name)) {
+				tempPerson = person;
+				System.out.println("Old" + tempPerson.getFirstName());
+				System.out.println("New Name " + newperson.getFirstName());
+				tempPerson.setEmail(newperson.getEmail());
+				break;
+			}
+		}
+		return tempPerson;
+	}
+
+	@Override
+	public Person updateByLastName(String name, Person newperson) {
+		Person tempPerson = null;
+		Collection<Person> personlist = persons.values();
+		System.out.println("Updated " + personlist);
+		for (Person person : personlist) {
+			if (person.getLastName().equals(name)) {
+				tempPerson = person;
+				System.out.println("Old" + tempPerson.getFirstName());
+				System.out.println("New Name " + newperson.getFirstName());
+				tempPerson.setLastName(newperson.getLastName());
 				break;
 			}
 		}
