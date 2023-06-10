@@ -6,11 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Setter
 @Getter
 public class MyCustomException extends RuntimeException{
 	
 	private String message;
+
+	public MyCustomException(String message) {
+		this.message = message;
+	}
+
 
 }

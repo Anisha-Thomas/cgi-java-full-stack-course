@@ -3,14 +3,17 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -94,15 +97,41 @@ public class UserController {
 		UserResponseModel model = userService.getuserById(id);
 		System.out.println(model);
 		if (model == null) {
-			throw new MyCustomException();
+			throw new MyCustomException("Id "+id+" Not Found");
 		} else {
 			return ResponseEntity.ok(model);
 		}
 	}
+
 	@GetMapping("/findByUserId/{userId}")
-	public ResponseEntity<?> getUserByUserId(@PathVariable("userId") String userId)
-	{
+	public ResponseEntity<?> getUserByUserId(@PathVariable("userId") String userId) {
 		return ResponseEntity.ok(userService.findByUserId(userId));
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteUserById(@PathVariable("id") int id)
+			throws NumberFormatException, MyCustomException {
+
+		UserResponseModel model = userService.getuserById(id);
+		System.out.println(model);
+		if (model == null) {
+			throw new MyCustomException("User Id"+id +"Not Found");
+		} else {
+			userService.deleteUserById(id);
+			return ResponseEntity.ok().body("Deleted Sucessfully");
+		}
+	}
+
+	@DeleteMapping("/")
+	public ResponseEntity<?> deleteAllUser() {
+		userService.deleteAllUsers();
+		return ResponseEntity.ok().body("Deleted Sucessfully");
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<UserResponseModel> updateUserById(@PathVariable("id") int id,
+			@RequestBody UserRequestModel userRequestModel) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.updateUserById(id, userRequestModel));
 	}
 
 }
