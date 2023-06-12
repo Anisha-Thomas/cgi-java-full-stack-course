@@ -1,11 +1,12 @@
 com\example\demo\ui\UserResponseModel.class
-com\example\demo\repo\UserRepository.class
 com\example\demo\entity\UserEntity.class
+com\example\demo\config\SpringSecurityConfig.class
 com\example\demo\service\UserServiceImpl.class
 com\example\demo\exception\MyCustomException.class
 com\example\demo\service\UserService.class
+com\example\demo\ui\UserRequestModel.class
+com\example\demo\dto\UserDto.class
+com\example\demo\repo\UserRepository.class
 com\example\demo\controller\UserController.class
 com\example\demo\ui\ErrorModel.class
-com\example\demo\ui\UserRequestModel.class
 com\example\demo\UserServiceApplication.class
-com\example\demo\dto\UserDto.class

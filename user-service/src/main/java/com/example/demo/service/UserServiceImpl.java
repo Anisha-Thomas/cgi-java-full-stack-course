@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserDto;
@@ -83,16 +82,16 @@ public class UserServiceImpl implements UserService {
 		return modelMapper.map(entity, UserResponseModel.class);
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public UserResponseModel updateUserById(int id, UserRequestModel userRequestModel) {
 		UserResponseModel userResponseModel = null;
 		Optional<UserEntity> userEntityFromDb = userRepository.findById(id);
 		if (userEntityFromDb.isPresent()) {
 			UserEntity entity = userEntityFromDb.get();
-			System.out.println("Entity "+entity);
-			entity.setFirstName(userResponseModel.getFirstName());
-			entity.setLastName(userResponseModel.getLastName());
-			entity.setEmail(userResponseModel.getEmail());
+			entity.setFirstName(userRequestModel.getFirstName());
+			entity.setLastName(userRequestModel.getLastName());
+			entity.setEmail(userRequestModel.getEmail());
 			UserEntity user = userRepository.save(entity);
 			System.out.println("User " +user);
 			userResponseModel = modelMapper.map(user, UserResponseModel.class);
